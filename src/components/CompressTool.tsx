@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
 import confetti from 'canvas-confetti';
+import LoadingOverlay from './LoadingOverlay';
+import { AnimatePresence } from 'motion/react';
 import { 
   Zap, FileText, CheckCircle, RefreshCw, 
   Download, Plus, ShieldCheck, HelpCircle 
@@ -128,7 +130,16 @@ export default function CompressTool({ onBack }: CompressToolProps) {
     : 0;
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-8" id="compress-tool-view">
+    <div className="w-full max-w-5xl mx-auto px-4 py-8 relative min-h-[400px]" id="compress-tool-view">
+      <AnimatePresence>
+        {isProcessing && (
+          <LoadingOverlay
+            fullscreen={false}
+            message="Optimizing PDF File"
+            submessage="Decompressing image layers, re-sampling graphic elements, and shrinking file bytes natively..."
+          />
+        )}
+      </AnimatePresence>
       <div className="flex items-center justify-between mb-8">
         <div>
           <button 

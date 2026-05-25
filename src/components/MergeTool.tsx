@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { UploadedFile } from '../types';
 import { PDFDocument } from 'pdf-lib';
 import confetti from 'canvas-confetti';
+import LoadingOverlay from './LoadingOverlay';
+import { AnimatePresence } from 'motion/react';
 import { 
   FileText, ArrowUp, ArrowDown, Trash2, Plus, 
   Sparkles, Layers, Download, CheckCircle, RefreshCw 
@@ -177,7 +179,16 @@ export default function MergeTool({ onBack }: MergeToolProps) {
   const totalSizeSum = files.reduce((sum, f) => sum + f.size, 0);
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-8" id="merge-tool-view">
+    <div className="w-full max-w-5xl mx-auto px-4 py-8 relative min-h-[400px]" id="merge-tool-view">
+      <AnimatePresence>
+        {isProcessing && (
+          <LoadingOverlay
+            fullscreen={false}
+            message="Merging PDF Documents"
+            submessage="Assembling bytes, re-ordering streams, and rendering layouts offline safely in your sandbox..."
+          />
+        )}
+      </AnimatePresence>
       <div className="flex items-center justify-between mb-8">
         <div>
           <button 

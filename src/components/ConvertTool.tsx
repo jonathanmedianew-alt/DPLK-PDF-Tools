@@ -4,6 +4,8 @@ import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { Document as DocxDoc, Packer, Paragraph as DocxParagraph, TextRun as DocxTextRun } from 'docx';
 import * as XLSX from 'xlsx';
 import confetti from 'canvas-confetti';
+import LoadingOverlay from './LoadingOverlay';
+import { AnimatePresence } from 'motion/react';
 import { 
   FileText, ArrowLeftRight, Download, RefreshCw, 
   Sparkles, CheckCircle, HelpCircle, ShieldCheck,
@@ -509,7 +511,16 @@ export default function ConvertTool({ mode, onBack }: ConvertToolProps) {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-8" id="convert-tool-view">
+    <div className="w-full max-w-5xl mx-auto px-4 py-8 relative min-h-[400px]" id="convert-tool-view">
+      <AnimatePresence>
+        {isProcessing && (
+          <LoadingOverlay
+            fullscreen={false}
+            message={`Converting to ${meta.outputExt.slice(1).toUpperCase()}`}
+            submessage="Analyzing text boundaries, setting tables, and mapping structures client-side safely..."
+          />
+        )}
+      </AnimatePresence>
       <div className="flex items-center justify-between mb-8">
         <div>
           <button 

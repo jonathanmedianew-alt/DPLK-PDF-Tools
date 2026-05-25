@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ToolId } from './types';
 import Dashboard from './components/Dashboard';
 import MergeTool from './components/MergeTool';
@@ -16,13 +16,58 @@ import WordEditor from './components/WordEditor';
 import SignTool from './components/SignTool';
 import WatermarkTool from './components/WatermarkTool';
 import PowerpointEditor from './components/PowerpointEditor';
+import LoadingOverlay from './components/LoadingOverlay';
 import { Layers, HelpCircle, FileText, Globe } from 'lucide-react';
+import { AnimatePresence } from 'motion/react';
 
 export default function App() {
   const [activeTool, setActiveTool] = useState<ToolId | null>(null);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [loadingMsg, setLoadingMsg] = useState('Loading Space Designer');
+  const [loadingSubmsg, setLoadingSubmsg] = useState('Initializing protected browser memory...');
+
+  useEffect(() => {
+    // Initial high-fidelity brand splash
+    const timer = setTimeout(() => {
+      setIsInitialLoading(false);
+    }, 1600);
+    return () => clearTimeout(timer);
+  }, []);
 
   const selectTool = (id: ToolId | null) => {
-    setActiveTool(id);
+    setIsTransitioning(true);
+    
+    if (id) {
+      const toolNames: Record<string, string> = {
+        merge: 'Merge PDF Tool',
+        split: 'Split PDF Tool',
+        compress: 'Compress PDF Workspace',
+        edit: 'Edit PDF Workbench',
+        'excel-editor': 'Excel Sheets Editor',
+        'word-editor': 'Word Rich Text Editor',
+        sign: 'Secure Signature Suite',
+        watermark: 'PDF Protection Watermarks',
+        'powerpoint-editor': 'Interactive Slides Presentation Designer',
+        'pdf-to-word': 'PDF to Word Converter',
+        'pdf-to-powerpoint': 'PDF to PowerPoint Converter',
+        'pdf-to-excel': 'PDF to Excel Converter',
+        'word-to-pdf': 'Word Document Compiler',
+        'powerpoint-to-pdf': 'PowerPoint Slides Compiler',
+        'excel-to-pdf': 'Excel Spreadsheet Compiler',
+      };
+      const name = toolNames[id] || 'Conversion Module';
+      setLoadingMsg(`Setting Up ${name}`);
+      setLoadingSubmsg('Configuring full-featured offline virtual layout engine...');
+    } else {
+      setLoadingMsg('Returning to Dashboard');
+      setLoadingSubmsg('Decompressing workspaces and syncing security context safely...');
+    }
+
+    setTimeout(() => {
+      setActiveTool(id);
+      setIsTransitioning(false);
+    }, 700);
   };
 
   const getActiveToolComponent = () => {
@@ -158,6 +203,26 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Brand Loading Overlays with Logo */}
+      <AnimatePresence mode="wait">
+        {isInitialLoading && (
+          <LoadingOverlay
+            key="initial-load"
+            message="Welcome to DPLK Tools"
+            submessage="Initializing secured offline compiler & toolkit..."
+            fullscreen={true}
+          />
+        )}
+        {!isInitialLoading && isTransitioning && (
+          <LoadingOverlay
+            key="tool-transition"
+            message={loadingMsg}
+            submessage={loadingSubmsg}
+            fullscreen={true}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
