@@ -19,14 +19,36 @@ import PowerpointEditor from './components/PowerpointEditor';
 import AccessVerificationGate from './components/AccessVerificationGate';
 import AdminPanel from './components/AdminPanel';
 import { fetchCloudRequests } from './lib/syncService';
-import { Layers, HelpCircle, FileText, Globe, ShieldAlert, LogOut } from 'lucide-react';
+import { Layers, HelpCircle, FileText, Globe, ShieldAlert, LogOut, ChevronDown, Grid, LayoutDashboard } from 'lucide-react';
 
 export default function App() {
   const [activeTool, setActiveTool] = useState<ToolId | null>(null);
   const [sessionEmail, setSessionEmail] = useState<string | null>(localStorage.getItem('dplk_verified_email'));
   const [requests, setRequests] = useState<AccessRequest[]>([]);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [rebuildCounter, setRebuildCounter] = useState(0);
+
+  const getToolLabel = (id: string): string => {
+    const labels: Record<string, string> = {
+      'merge': 'Merge PDF',
+      'split': 'Split PDF',
+      'compress': 'Compress PDF',
+      'edit': 'Edit PDF',
+      'excel-editor': 'Excel Editor',
+      'word-editor': 'Word Editor',
+      'powerpoint-editor': 'PowerPoint Editor',
+      'sign': 'Sign PDF',
+      'watermark': 'Watermark',
+      'pdf-to-word': 'PDF to Word',
+      'pdf-to-powerpoint': 'PDF to PowerPoint',
+      'pdf-to-excel': 'PDF to Excel',
+      'word-to-pdf': 'Word to PDF',
+      'excel-to-pdf': 'Excel to PDF',
+      'powerpoint-to-pdf': 'PowerPoint to PDF',
+    };
+    return labels[id] || 'Tool';
+  };
 
   const selectTool = (id: ToolId | null) => {
     setActiveTool(id);
@@ -113,93 +135,179 @@ export default function App() {
     <div className="min-h-screen bg-gray-50/50 flex flex-col font-sans selection:bg-rose-500/10 selection:text-rose-900" id="app-root">
       {/* Visual Navigation Header */}
       <header className="bg-white border-b border-gray-200/80 sticky top-0 z-50 shadow-xs animate-fade-in" id="primary-header">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <button 
-            type="button" 
-            onClick={() => {
-              if (isUnlocked) {
-                setShowAdminPanel(false);
-                selectTool(null);
-              }
-            }}
-            disabled={!isUnlocked}
-            className={`flex items-center gap-2.5 font-bold text-gray-900 tracking-tight text-lg transition duration-150 ${isUnlocked ? 'hover:text-rose-600 cursor-pointer' : 'opacity-70'}`}
-          >
-            <div className="bg-rose-600 text-white p-1.5 rounded-lg shadow-sm">
-              <Layers className="h-4.5 w-4.5" />
-            </div>
-            <span>DPLK Tools</span>
-          </button>
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+          
+          {/* Logo & Breadcrumb Navigation Block */}
+          <div className="flex items-center gap-2 overflow-hidden shrink-0">
+            <button 
+              type="button" 
+              onClick={() => {
+                if (isUnlocked) {
+                  setShowAdminPanel(false);
+                  selectTool(null);
+                }
+              }}
+              disabled={!isUnlocked}
+              className={`flex items-center gap-2 font-bold text-gray-900 tracking-tight text-base sm:text-lg transition duration-150 shrink-0 ${isUnlocked ? 'hover:text-rose-600 cursor-pointer' : 'opacity-70'}`}
+            >
+              <div className="bg-rose-600 text-white p-1.5 rounded-lg shadow-xs">
+                <Layers className="h-4 w-4" />
+              </div>
+              <span className="inline text-sm sm:text-base">DPLK Tools</span>
+            </button>
 
-          {/* Core Shortcuts (only available if verified) */}
-          {isUnlocked && !showAdminPanel && (
-            <nav className="hidden md:flex items-center gap-6">
-              <button 
-                type="button" 
-                onClick={() => selectTool('merge')}
-                className={`text-xs font-bold transition hover:text-rose-600 ${activeTool === 'merge' ? 'text-rose-600' : 'text-gray-500'}`}
+            {isUnlocked && (activeTool || showAdminPanel) && (
+              <div className="flex items-center gap-1.5 shrink-0 select-none">
+                <span className="text-gray-300 font-light text-sm">/</span>
+                <span className="text-[11px] font-bold text-gray-500 bg-gray-50 border border-gray-200/60 px-2.5 py-0.5 rounded-md truncate max-w-[100px] sm:max-w-none">
+                  {showAdminPanel ? 'Admin Panel' : getToolLabel(activeTool!)}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* Elegant Workspace Tools Dropdown */}
+          {isUnlocked && (
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl transition duration-150 border cursor-pointer select-none ${
+                  dropdownOpen 
+                    ? 'bg-rose-50 border-rose-200 text-rose-700' 
+                    : 'bg-gray-50 border-gray-200/85 text-gray-700 hover:bg-gray-100 hover:text-rose-600'
+                }`}
               >
-                Merge
+                <Grid className="h-3.5 w-3.5 shrink-0 text-rose-500" />
+                <span className="hidden sm:inline">Workspace Tools</span>
+                <span className="sm:hidden">Tools</span>
+                <ChevronDown className={`h-3 w-3 transition-transform duration-200 shrink-0 ${dropdownOpen ? 'rotate-180' : ''}`} />
               </button>
-              <button 
-                type="button" 
-                onClick={() => selectTool('split')}
-                className={`text-xs font-bold transition hover:text-rose-600 ${activeTool === 'split' ? 'text-rose-600' : 'text-gray-500'}`}
-              >
-                Split
-              </button>
-              <button 
-                type="button" 
-                onClick={() => selectTool('compress')}
-                className={`text-xs font-bold transition hover:text-rose-600 ${activeTool === 'compress' ? 'text-rose-600' : 'text-gray-500'}`}
-              >
-                Compress
-              </button>
-              <button 
-                type="button" 
-                onClick={() => selectTool('edit')}
-                className={`text-xs font-bold transition hover:text-rose-600 ${activeTool === 'edit' ? 'text-rose-600' : 'text-gray-500'}`}
-              >
-                Edit PDF
-              </button>
-              <span className="text-gray-300">|</span>
-              <button 
-                type="button" 
-                onClick={() => selectTool('excel-editor')}
-                className={`text-xs font-bold transition hover:text-emerald-600 ${activeTool === 'excel-editor' ? 'text-emerald-600' : 'text-slate-700'}`}
-              >
-                Excel Editor
-              </button>
-              <span className="text-gray-300">|</span>
-              <button 
-                type="button" 
-                onClick={() => selectTool('word-editor')}
-                className={`text-xs font-bold transition hover:text-blue-600 ${activeTool === 'word-editor' ? 'text-blue-600' : 'text-slate-700'}`}
-              >
-                Word Editor
-              </button>
-              <span className="text-gray-300">|</span>
-              <button 
-                type="button" 
-                onClick={() => selectTool('powerpoint-editor')}
-                className={`text-xs font-bold transition hover:text-amber-600 ${activeTool === 'powerpoint-editor' ? 'text-amber-600' : 'text-slate-750'}`}
-              >
-                PowerPoint Editor
-              </button>
-              <span className="text-gray-300">|</span>
-              <button 
-                type="button" 
-                onClick={() => selectTool('pdf-to-word')}
-                className="text-xs font-bold text-gray-500 transition hover:text-rose-600"
-              >
-                Convert Forms
-              </button>
-            </nav>
+
+              {dropdownOpen && (
+                <>
+                  {/* Backdrop for closing */}
+                  <div className="fixed inset-0 z-40 cursor-default" onClick={() => setDropdownOpen(false)} />
+                  
+                  <div className="absolute right-[-40px] sm:right-auto sm:left-1/2 sm:-translate-x-1/2 mt-2 w-[285px] sm:w-[460px] bg-white border border-gray-250/90 rounded-2xl shadow-xl shadow-gray-200/50 z-50 p-4 animate-fade-in divide-y divide-gray-150/50">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-3">
+                      <div>
+                        <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 px-1">PDF Utilities</h4>
+                        <div className="space-y-0.5">
+                          {[
+                            { id: 'merge', label: 'Merge PDF' },
+                            { id: 'split', label: 'Split PDF' },
+                            { id: 'compress', label: 'Compress PDF' },
+                            { id: 'edit', label: 'Edit PDF' },
+                            { id: 'sign', label: 'Sign PDF' },
+                            { id: 'watermark', label: 'Watermark' },
+                          ].map(t => (
+                            <button
+                              key={t.id}
+                              type="button"
+                              onClick={() => {
+                                selectTool(t.id as ToolId);
+                                setShowAdminPanel(false);
+                                setDropdownOpen(false);
+                              }}
+                              className={`w-full text-left font-sans text-xs px-2.5 py-1.5 rounded-lg transition-colors flex items-center justify-between cursor-pointer ${
+                                activeTool === t.id 
+                                  ? 'bg-rose-50 text-rose-700 font-bold' 
+                                  : 'text-gray-650 hover:bg-gray-50'
+                              }`}
+                            >
+                              <span>{t.label}</span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div>
+                          <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5 px-1">Office Editors</h4>
+                          <div className="space-y-0.5">
+                            {[
+                              { id: 'excel-editor', label: 'Excel Editor' },
+                              { id: 'word-editor', label: 'Word Editor' },
+                              { id: 'powerpoint-editor', label: 'PowerPoint Editor' },
+                            ].map(t => (
+                              <button
+                                key={t.id}
+                                type="button"
+                                onClick={() => {
+                                  selectTool(t.id as ToolId);
+                                  setShowAdminPanel(false);
+                                  setDropdownOpen(false);
+                                }}
+                                className={`w-full text-left font-sans text-xs px-2.5 py-1.5 rounded-lg transition-colors flex items-center justify-between cursor-pointer ${
+                                  activeTool === t.id 
+                                    ? 'bg-emerald-50 text-emerald-700 font-bold' 
+                                    : 'text-gray-650 hover:bg-gray-50'
+                                }`}
+                              >
+                                <span>{t.label}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div>
+                          <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5 px-1">Format Converters</h4>
+                          <div className="space-y-0.5">
+                            {[
+                              { id: 'pdf-to-word', label: 'PDF to Word' },
+                              { id: 'pdf-to-excel', label: 'PDF to Excel' },
+                              { id: 'pdf-to-powerpoint', label: 'PDF to PowerPoint' },
+                              { id: 'word-to-pdf', label: 'Word to PDF' },
+                              { id: 'excel-to-pdf', label: 'Excel to PDF' },
+                              { id: 'powerpoint-to-pdf', label: 'PowerPoint to PDF' },
+                            ].map(t => (
+                              <button
+                                key={t.id}
+                                type="button"
+                                onClick={() => {
+                                  selectTool(t.id as ToolId);
+                                  setShowAdminPanel(false);
+                                  setDropdownOpen(false);
+                                }}
+                                className={`w-full text-left font-sans text-xs px-2.5 py-1.5 rounded-lg transition-colors flex items-center justify-between cursor-pointer ${
+                                  activeTool === t.id 
+                                    ? 'bg-blue-50 text-blue-700 font-bold' 
+                                    : 'text-gray-650 hover:bg-gray-50'
+                                }`}
+                              >
+                                <span>{t.label}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          selectTool(null);
+                          setShowAdminPanel(false);
+                          setDropdownOpen(false);
+                        }}
+                        className="w-full bg-gray-50 hover:bg-gray-100 text-gray-750 hover:text-rose-600 font-sans font-bold text-xs py-2 rounded-xl transition flex items-center justify-center gap-1.5 cursor-pointer border border-gray-100"
+                      >
+                        <LayoutDashboard className="h-3.5 w-3.5 text-rose-500" />
+                        <span>Go to Main Dashboard</span>
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
           )}
 
-          <div className="flex items-center gap-3">
+          {/* User Profile & Actions Bar */}
+          <div className="flex items-center gap-2.5 shrink-0 animate-fade-in">
             {isUnlocked ? (
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2.5">
                 {/* Admin Console shortcut link */}
                 {isAdmin && (
                   <button
@@ -207,40 +315,43 @@ export default function App() {
                     onClick={() => {
                       setShowAdminPanel(!showAdminPanel);
                       selectTool(null);
+                      setDropdownOpen(false);
                     }}
-                    className={`text-xs font-bold px-3 py-1.5 rounded-lg border transition duration-150 flex items-center gap-1.5 cursor-pointer ${
+                    className={`text-xs font-bold px-3 py-1.5 rounded-xl border transition duration-150 flex items-center gap-1.5 cursor-pointer ${
                       showAdminPanel 
-                        ? 'bg-rose-50 border-rose-200 text-rose-700' 
+                        ? 'bg-amber-50 border-amber-200 text-amber-800' 
                         : 'bg-slate-900 border-slate-900 text-white hover:bg-slate-800'
                     }`}
                   >
                     <ShieldAlert className="h-3.5 w-3.5" />
-                    <span>{showAdminPanel ? 'Dashboard' : 'Admin Panel'}</span>
+                    <span className="hidden md:inline">{showAdminPanel ? 'Exit Admin' : 'Admin Panel'}</span>
+                    <span className="md:hidden">Admin</span>
                   </button>
                 )}
 
                 {/* Logged in Email Info and logout */}
-                <div className="hidden sm:flex flex-col items-end">
+                <div className="hidden lg:flex flex-col items-end">
                   <span className="text-[10px] font-bold text-gray-800 tracking-tight">{sessionEmail}</span>
-                  <span className="text-[9px] text-emerald-600 font-medium">Verified Active</span>
+                  <span className="text-[9px] text-emerald-600 font-medium">Security Verified</span>
                 </div>
 
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="p-1.5 bg-gray-50 hover:bg-gray-100 text-gray-500 hover:text-rose-600 border border-gray-200/60 rounded-lg transition scroll-p-1 cursor-pointer"
+                  className="p-1.5 bg-gray-50 hover:bg-gray-100 text-gray-400 hover:text-rose-600 border border-gray-200/60 rounded-xl transition cursor-pointer"
                   title="Disconnect and Logout"
                 >
-                  <LogOut className="h-4.5 w-4.5" />
+                  <LogOut className="h-4 w-4" />
                 </button>
               </div>
             ) : (
               <div className="text-[10px] font-mono text-gray-450 bg-gray-50 border border-gray-150 rounded-lg px-2 py-1 flex items-center gap-1.5">
                 <Globe className="h-3 w-3 text-emerald-500 animate-pulse" />
-                <span>Security Engine Offloaded</span>
+                <span className="hidden sm:inline">Secure Sandbox</span>
               </div>
             )}
           </div>
+
         </div>
       </header>
 

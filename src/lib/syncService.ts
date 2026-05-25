@@ -1,17 +1,10 @@
 import { AccessRequest } from '../types';
 
 // Deterministic hash function for simple hostname unique keying
-function prattHash(str: string): string {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = (hash * 31 + str.charCodeAt(i)) & 0xFFFFFFFF;
-  }
-  return Math.abs(hash).toString(36);
-}
-
 function getSyncId(): string {
-  const host = window.location.hostname;
-  return `dplk_suite_${prattHash(host)}`;
+  // Use a stable, constant identifier derived from the applet ID to prevent database partitioning.
+  // This ensures localhost, dev servers, and live URLs all synchronize to the exact same workspace registry.
+  return 'dplk_suite_0e8c24c7_57c5';
 }
 
 const DEFAULT_USERS: AccessRequest[] = [

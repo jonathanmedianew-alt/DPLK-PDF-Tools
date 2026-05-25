@@ -127,7 +127,7 @@ export default function AdminPanel({ onBack, onRefreshSiteAccess }: AdminPanelPr
             </span>
             <span className="inline-flex items-center gap-1 text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
               <Wifi className={`h-2.5 w-2.5 ${syncStatus === 'synced' ? 'animate-pulse text-emerald-400' : 'text-amber-400'}`} />
-              <span>{syncStatus === 'synced' ? 'Real-time Linked (Netlify Sync)' : 'Connecting cloud...'}</span>
+              <span>{syncStatus === 'synced' ? 'Real-time Linked (Cloud Database)' : 'Connecting cloud...'}</span>
             </span>
           </div>
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight">Admin Console</h1>
@@ -201,13 +201,13 @@ export default function AdminPanel({ onBack, onRefreshSiteAccess }: AdminPanelPr
           </div>
 
           {/* Quick Guide */}
-          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-5 text-gray-600">
-            <h3 className="text-xs font-bold text-gray-800 uppercase tracking-widest mb-2.5">Netlify Multi-User Testing</h3>
+          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-5 text-gray-650">
+            <h3 className="text-xs font-bold text-gray-800 uppercase tracking-widest mb-2.5">Multi-User Integration</h3>
             <p className="text-xs leading-relaxed mb-2 text-gray-500">
-              When a new user visits your Netlify link, they must register their email. 
+              When a new team member visits your secure workspace link, they will be prompted to verify their corporate email.
             </p>
             <p className="text-xs leading-relaxed text-gray-500">
-              Their requests will synchronize globally using a secure cloud storage endpoint and show up in your panel here instantly! Simply click <strong className="text-emerald-700">Approve</strong> to give them immediate entry.
+              Their security registration is synced globally and will appear in your admin dashboard instantly. Simply click <strong className="text-emerald-700 font-bold">Approve Access</strong> to authorize their identity immediately.
             </p>
           </div>
 
@@ -245,7 +245,7 @@ export default function AdminPanel({ onBack, onRefreshSiteAccess }: AdminPanelPr
             {pendingList.length === 0 ? (
               <div className="text-center py-6 text-gray-400">
                 <p className="text-xs font-medium">No pending requests right now.</p>
-                <p className="text-[10px] text-gray-400 mt-0.5">New users requesting access in Netlify will show here in real-time.</p>
+                <p className="text-[10px] text-gray-400 mt-0.5">New users requesting access will show here in real-time as they attempt login.</p>
               </div>
             ) : (
               <div className="space-y-3">
@@ -315,7 +315,7 @@ export default function AdminPanel({ onBack, onRefreshSiteAccess }: AdminPanelPr
                           )}
                         </div>
                         <p className="text-[10px] text-gray-400 flex items-center gap-1">
-                          <CheckCircle2 className="h-3. w-3. Text-emerald-500" />
+                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
                           <span>Whitelisted {new Date(user.submittedAt).toLocaleDateString()}</span>
                         </p>
                       </div>
