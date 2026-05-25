@@ -39,7 +39,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Combine PDFs in the order you want with the easiest PDF merger available.',
       icon: 'Layers',
       category: 'organize',
-      color: 'bg-rose-50 hover:bg-rose-100 hover:border-rose-400 text-rose-600 border-rose-100'
+      color: 'bg-rose-50 dark:bg-rose-950/15 hover:bg-rose-100 dark:hover:bg-rose-950/30 text-rose-600 dark:text-rose-400 border-rose-100 dark:border-rose-950/30 hover:border-rose-400 dark:hover:border-rose-500/50'
     },
     {
       id: 'split',
@@ -48,7 +48,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Separate one page or a whole set for easy conversion into independent PDF files.',
       icon: 'Scissors',
       category: 'organize',
-      color: 'bg-indigo-50 hover:bg-indigo-100 hover:border-indigo-400 text-indigo-600 border-indigo-100'
+      color: 'bg-indigo-50 dark:bg-indigo-950/15 hover:bg-indigo-100 dark:hover:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 border-indigo-100 dark:border-indigo-950/30 hover:border-indigo-400 dark:hover:border-indigo-500/50'
     },
     {
       id: 'compress',
@@ -57,7 +57,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Reduce file size while optimizing for maximal PDF quality.',
       icon: 'Zap',
       category: 'optimize',
-      color: 'bg-amber-50 hover:bg-amber-100 hover:border-amber-400 text-amber-600 border-amber-100'
+      color: 'bg-amber-50 dark:bg-amber-950/15 hover:bg-amber-100 dark:hover:bg-amber-950/30 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-950/30 hover:border-amber-400 dark:hover:border-amber-500/50'
     },
     {
       id: 'pdf-to-word',
@@ -66,7 +66,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Easily convert your PDF files into easy to edit DOC and DOCX documents. The converted WORD document is almost 100% accurate.',
       icon: 'FileText',
       category: 'convert-from',
-      color: 'bg-blue-50 hover:bg-blue-100 hover:border-blue-400 text-blue-600 border-blue-100'
+      color: 'bg-blue-50 dark:bg-blue-950/15 hover:bg-blue-100 dark:hover:bg-blue-950/30 text-blue-600 dark:text-blue-400 border-blue-100 dark:border-blue-950/30 hover:border-blue-400 dark:hover:border-blue-500/50'
     },
     {
       id: 'pdf-to-powerpoint',
@@ -75,7 +75,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Turn your PDF files into easy to edit PPT and PPTX slideshows.',
       icon: 'Presentation',
       category: 'convert-from',
-      color: 'bg-orange-50 hover:bg-orange-100 hover:border-orange-400 text-orange-600 border-orange-100'
+      color: 'bg-orange-50 dark:bg-orange-950/15 hover:bg-orange-100 dark:hover:bg-orange-950/30 text-orange-600 dark:text-orange-400 border-orange-100 dark:border-orange-950/30 hover:border-orange-400 dark:hover:border-orange-500/50'
     },
     {
       id: 'pdf-to-excel',
@@ -84,7 +84,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Pull data straight from PDFs into Excel spreadsheets in a few short seconds.',
       icon: 'FileSpreadsheet',
       category: 'convert-from',
-      color: 'bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-400 text-emerald-600 border-emerald-100'
+      color: 'bg-emerald-50 dark:bg-emerald-950/15 hover:bg-emerald-100 dark:hover:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-950/30 hover:border-emerald-400 dark:hover:border-emerald-500/50'
     },
     {
       id: 'word-to-pdf',
@@ -93,7 +93,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Make DOC and DOCX files easy to read by converting them to PDF.',
       icon: 'FileText',
       category: 'convert-to',
-      color: 'bg-sky-50 hover:bg-sky-100 hover:border-sky-400 text-sky-600 border-sky-100'
+      color: 'bg-sky-50 dark:bg-sky-950/15 hover:bg-sky-100 dark:hover:bg-sky-950/30 text-sky-600 dark:text-sky-400 border-sky-100 dark:border-sky-950/30 hover:border-sky-400 dark:hover:border-sky-500/50'
     },
     {
       id: 'powerpoint-to-pdf',
@@ -102,7 +102,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Make PPT and PPTX slideshows easy to view by converting them to PDF.',
       icon: 'Presentation',
       category: 'convert-to',
-      color: 'bg-red-50 hover:bg-red-100 hover:border-red-400 text-red-600 border-red-100'
+      color: 'bg-red-50 dark:bg-red-950/15 hover:bg-red-100 dark:hover:bg-red-950/30 text-red-600 dark:text-red-400 border-red-100 dark:border-red-950/30 hover:border-red-400 dark:hover:border-red-500/50'
     },
     {
       id: 'excel-to-pdf',
@@ -111,7 +111,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Make EXCEL spreadsheets easy to read by converting them to PDF.',
       icon: 'FileSpreadsheet',
       category: 'convert-to',
-      color: 'bg-green-50 hover:bg-green-100 hover:border-green-400 text-green-600 border-green-100'
+      color: 'bg-green-50 dark:bg-green-950/15 hover:bg-green-100 dark:hover:bg-green-950/30 text-green-600 dark:text-green-400 border-green-100 dark:border-green-950/30 hover:border-green-400 dark:hover:border-green-500/50'
     },
     {
       id: 'edit',
@@ -120,7 +120,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Add text, images, shapes or freehand annotations to a PDF document. Edit the size, font, and color of the added content.',
       icon: 'Edit3',
       category: 'edit',
-      color: 'bg-rose-50 hover:bg-rose-100 hover:border-rose-400 text-rose-500 border-rose-100'
+      color: 'bg-rose-50 dark:bg-rose-950/15 hover:bg-rose-100 dark:hover:bg-rose-950/30 text-rose-500 dark:text-rose-400 border-rose-100 dark:border-rose-950/30 hover:border-rose-400 dark:hover:border-rose-500/50'
     },
     {
       id: 'excel-editor',
@@ -129,7 +129,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Free browser-based Excel sheet editor. Design budgets, manage projects, and analyze data with formulas (SUM, AVERAGE, etc.), dynamic charts, and seamless XLSX import/export.',
       icon: 'FileSpreadsheet',
       category: 'edit',
-      color: 'bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-400 text-emerald-600 border-emerald-100'
+      color: 'bg-emerald-50 dark:bg-emerald-950/15 hover:bg-emerald-100 dark:hover:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-950/30 hover:border-emerald-400 dark:hover:border-emerald-500/50'
     },
     {
       id: 'word-editor',
@@ -138,7 +138,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Free browser-based Word document creator. Structure resumes, proposals, and newsletters, apply headings/styles, insert tables & images, and export directly as Word files.',
       icon: 'FileText',
       category: 'edit',
-      color: 'bg-blue-50 hover:bg-blue-100 hover:border-blue-400 text-blue-600 border-blue-100'
+      color: 'bg-blue-50 dark:bg-blue-950/15 hover:bg-blue-100 dark:hover:bg-blue-950/30 text-blue-600 dark:text-blue-400 border-blue-100 dark:border-blue-950/30 hover:border-blue-400 dark:hover:border-blue-500/50'
     },
     {
       id: 'powerpoint-editor',
@@ -147,7 +147,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Create, design, and present amazing slide decks. Control background style, rich layouts, insert shapes, text boxes, and run beautiful animated presentation slideshow screens natively.',
       icon: 'Presentation',
       category: 'edit',
-      color: 'bg-amber-50 hover:bg-amber-100 hover:border-amber-400 text-amber-600 border-amber-100'
+      color: 'bg-amber-50 dark:bg-amber-950/15 hover:bg-amber-100 dark:hover:bg-amber-950/30 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-950/30 hover:border-amber-400 dark:hover:border-amber-500/50'
     },
     {
       id: 'sign',
@@ -156,7 +156,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Sign yourself or request electronic signatures from others. Draw signature, type your name, or upload an image and position it layout-perfect on pages.',
       icon: 'PenTool',
       category: 'organize',
-      color: 'bg-violet-50 hover:bg-violet-100 hover:border-violet-400 text-violet-600 border-violet-100'
+      color: 'bg-violet-50 dark:bg-violet-950/15 hover:bg-violet-100 dark:hover:bg-violet-950/30 text-violet-600 dark:text-violet-400 border-violet-100 dark:border-violet-950/30 hover:border-violet-400 dark:hover:border-violet-500/50'
     },
     {
       id: 'watermark',
@@ -165,7 +165,7 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       description: 'Stamp an image or text over your PDF in seconds. Choose the typography, transparency and position.',
       icon: 'Stamp',
       category: 'edit',
-      color: 'bg-teal-50 hover:bg-teal-100 hover:border-teal-400 text-teal-600 border-teal-100'
+      color: 'bg-teal-50 dark:bg-teal-950/15 hover:bg-teal-100 dark:hover:bg-teal-950/30 text-teal-600 dark:text-teal-400 border-teal-100 dark:border-teal-950/30 hover:border-teal-400 dark:hover:border-teal-500/50'
     }
   ];
 
@@ -198,20 +198,20 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
       
       {/* Title & Slogan Section */}
       <div className="text-center max-w-2xl mx-auto mb-12">
-        <div className="bg-rose-50 text-rose-700 text-xs font-bold px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-4 shadow-xs">
+        <div className="bg-rose-50 dark:bg-rose-950/20 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 text-xs font-bold px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-4 shadow-xs">
           <Sparkles className="h-3 w-3" />
           100% Secure Client-Side Engine
         </div>
-        <h1 className="text-4xl sm:text-5xl font-sans font-bold text-gray-900 tracking-tight leading-tight">
-          Every tool you need to <span className="text-rose-600">work with PDFs, Sheets & Docs</span>, in one place
+        <h1 className="text-4xl sm:text-5xl font-sans font-bold text-gray-900 dark:text-white tracking-tight leading-tight">
+          Every tool you need to <span className="text-rose-600 dark:text-rose-400">work with PDFs, Sheets & Docs</span>, in one place
         </h1>
-        <p className="text-gray-500 text-base mt-4 font-sans leading-relaxed">
+        <p className="text-gray-500 dark:text-slate-400 text-base mt-4 font-sans leading-relaxed">
           Every tool is 100% free and easy to use! Edit, format, and visualize Word documents & Excel sheets, or merge, split, compress, and annotate your PDFs directly in your web browser.
         </p>
       </div>
 
       {/* Tabs list bar */}
-      <div className="flex justify-center flex-wrap gap-2 mb-10 max-w-3xl mx-auto border-b border-gray-100 pb-4">
+      <div className="flex justify-center flex-wrap gap-2 mb-10 max-w-3xl mx-auto border-b border-gray-100 dark:border-white/5 pb-4">
         {[
           { key: 'all', label: 'All Tools', count: tools.length },
           { key: 'organize', label: 'Organize PDF', count: tools.filter(t => t.category === 'organize').length },
@@ -223,15 +223,15 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
             key={tab.key}
             type="button"
             onClick={() => setActiveTab(tab.key as any)}
-            className={`px-4 py-2 text-xs font-bold rounded-xl transition flex items-center gap-2 ${
+            className={`px-4 py-2 text-xs font-bold rounded-xl transition flex items-center gap-2 cursor-pointer ${
               activeTab === tab.key
                 ? 'bg-rose-600 text-white shadow-md shadow-rose-600/10'
-                : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+                : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 dark:bg-slate-900 dark:border-white/10 dark:text-slate-300 dark:hover:bg-slate-800'
             }`}
           >
             {tab.label}
             <span className={`text-[10px] font-sans px-1.5 py-0.5 rounded-full ${
-              activeTab === tab.key ? 'bg-rose-700 text-rose-50' : 'bg-gray-100 text-gray-400'
+              activeTab === tab.key ? 'bg-rose-700 text-rose-50' : 'bg-gray-100 dark:bg-slate-800 text-gray-400 dark:text-slate-400'
             }`}>
               {tab.count}
             </span>
@@ -246,31 +246,31 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
             key={tool.id}
             type="button"
             onClick={() => onSelectTool(tool.id)}
-            className={`group text-left border rounded-2xl p-5 shadow-xs transition duration-200 cursor-pointer flex flex-col justify-between align-stretch min-h-[220px] bg-white ${tool.color}`}
+            className={`group text-left border border-gray-250 dark:border-white/10 rounded-2xl p-5 shadow-xs transition duration-200 cursor-pointer flex flex-col justify-between align-stretch min-h-[220px] bg-white dark:bg-slate-900 ${tool.color}`}
           >
             <div>
-              <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-4 shadow-sm bg-white shrink-0">
+              <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-4 shadow-sm bg-white dark:bg-slate-800 border border-gray-100 dark:border-white/5 shrink-0">
                 {getIconComponent(tool.icon)}
               </div>
-              <h3 className="text-base font-bold text-gray-900 mb-1.5 group-hover:text-rose-600 transition flex items-center justify-between gap-1">
+              <h3 className="text-base font-bold text-gray-900 dark:text-white mb-1.5 group-hover:text-rose-600 dark:group-hover:text-rose-400 transition flex items-center justify-between gap-1">
                 <span>{tool.title}</span>
                 {tool.id === 'powerpoint-editor' ? (
                   ppStatus === 'locked' ? (
-                    <span className="bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shrink-0">
-                      <Lock className="h-2.5 w-2.5 text-amber-600" />
+                    <span className="bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-900/40 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shrink-0">
+                      <Lock className="h-2.5 w-2.5 text-amber-600 dark:text-amber-400" />
                       <span>Gated</span>
                     </span>
                   ) : (
-                    <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shrink-0">
-                      <Unlock className="h-2.5 w-2.5 text-emerald-600" />
+                    <span className="bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/40 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shrink-0">
+                      <Unlock className="h-2.5 w-2.5 text-emerald-600 dark:text-emerald-400" />
                       <span>Unlocked</span>
                     </span>
                   )
                 ) : (
-                  <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 duration-200 text-rose-600 text-sm">→</span>
+                  <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 duration-200 text-rose-600 dark:text-rose-400 text-sm">→</span>
                 )}
               </h3>
-              <p className="text-xs text-gray-500 leading-relaxed line-clamp-4">
+              <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed line-clamp-4">
                 {tool.description}
               </p>
             </div>

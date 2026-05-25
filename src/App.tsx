@@ -17,7 +17,7 @@ import SignTool from './components/SignTool';
 import WatermarkTool from './components/WatermarkTool';
 import PowerpointEditor from './components/PowerpointEditor';
 import LoadingOverlay from './components/LoadingOverlay';
-import { Layers, HelpCircle, FileText, Globe } from 'lucide-react';
+import { Layers, HelpCircle, FileText, Globe, Sun, Moon } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 
 export default function App() {
@@ -26,6 +26,24 @@ export default function App() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [loadingMsg, setLoadingMsg] = useState('Loading Space Designer');
   const [loadingSubmsg, setLoadingSubmsg] = useState('Initializing protected browser memory...');
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('dplk_theme');
+      if (saved) return saved === 'dark';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('dplk_theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('dplk_theme', 'light');
+    }
+  }, [isDarkMode]);
 
   useEffect(() => {
     // Initial high-fidelity brand splash
@@ -99,14 +117,14 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50/50 flex flex-col font-sans selection:bg-rose-500/10 selection:text-rose-900" id="app-root">
+    <div className="min-h-screen bg-gray-50/50 dark:bg-slate-950 flex flex-col font-sans selection:bg-rose-500/10 selection:text-rose-900 transition-colors duration-250" id="app-root">
       {/* Visual Navigation Header */}
-      <header className="bg-white border-b border-gray-200/80 sticky top-0 z-50 shadow-xs" id="primary-header">
+      <header className="bg-white dark:bg-slate-900 border-b border-gray-200/80 dark:border-white/10 sticky top-0 z-50 shadow-xs transition-colors duration-250" id="primary-header">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <button 
             type="button" 
             onClick={() => selectTool(null)}
-            className="flex items-center gap-2.5 font-bold text-gray-900 tracking-tight text-lg transition duration-150 hover:text-rose-600"
+            className="flex items-center gap-2.5 font-bold text-gray-900 dark:text-white tracking-tight text-lg transition duration-150 hover:text-rose-600 dark:hover:text-rose-400"
           >
             <div className="bg-rose-600 text-white p-1.5 rounded-lg shadow-sm">
               <Layers className="h-4.5 w-4.5" />
@@ -119,70 +137,79 @@ export default function App() {
             <button 
               type="button" 
               onClick={() => selectTool('merge')}
-              className={`text-xs font-bold transition hover:text-rose-600 ${activeTool === 'merge' ? 'text-rose-600' : 'text-gray-500'}`}
+              className={`text-xs font-bold transition hover:text-rose-600 dark:hover:text-rose-400 ${activeTool === 'merge' ? 'text-rose-600 dark:text-rose-400' : 'text-gray-500 dark:text-slate-400'}`}
             >
               Merge
             </button>
             <button 
               type="button" 
               onClick={() => selectTool('split')}
-              className={`text-xs font-bold transition hover:text-rose-600 ${activeTool === 'split' ? 'text-rose-600' : 'text-gray-500'}`}
+              className={`text-xs font-bold transition hover:text-rose-600 dark:hover:text-rose-400 ${activeTool === 'split' ? 'text-rose-600 dark:text-rose-400' : 'text-gray-500 dark:text-slate-400'}`}
             >
               Split
             </button>
             <button 
               type="button" 
               onClick={() => selectTool('compress')}
-              className={`text-xs font-bold transition hover:text-rose-600 ${activeTool === 'compress' ? 'text-rose-600' : 'text-gray-500'}`}
+              className={`text-xs font-bold transition hover:text-rose-600 dark:hover:text-rose-400 ${activeTool === 'compress' ? 'text-rose-600 dark:text-rose-400' : 'text-gray-500 dark:text-slate-400'}`}
             >
               Compress
             </button>
             <button 
               type="button" 
               onClick={() => selectTool('edit')}
-              className={`text-xs font-bold transition hover:text-rose-600 ${activeTool === 'edit' ? 'text-rose-600' : 'text-gray-500'}`}
+              className={`text-xs font-bold transition hover:text-rose-600 dark:hover:text-rose-400 ${activeTool === 'edit' ? 'text-rose-600 dark:text-rose-400' : 'text-gray-500 dark:text-slate-400'}`}
             >
               Edit PDF
             </button>
-            <span className="text-gray-300">|</span>
+            <span className="text-gray-300 dark:text-slate-800">|</span>
             <button 
               type="button" 
               onClick={() => selectTool('excel-editor')}
-              className={`text-xs font-bold transition hover:text-emerald-600 ${activeTool === 'excel-editor' ? 'text-emerald-600' : 'text-slate-700'}`}
+              className={`text-xs font-bold transition hover:text-emerald-600 dark:hover:text-emerald-400 ${activeTool === 'excel-editor' ? 'text-emerald-600' : 'text-slate-700 dark:text-slate-300'}`}
             >
               Excel Editor
             </button>
-            <span className="text-gray-300">|</span>
+            <span className="text-gray-300 dark:text-slate-800">|</span>
             <button 
               type="button" 
               onClick={() => selectTool('word-editor')}
-              className={`text-xs font-bold transition hover:text-blue-600 ${activeTool === 'word-editor' ? 'text-blue-600' : 'text-slate-700'}`}
+              className={`text-xs font-bold transition hover:text-blue-600 dark:hover:text-blue-400 ${activeTool === 'word-editor' ? 'text-blue-600' : 'text-slate-700 dark:text-slate-300'}`}
             >
               Word Editor
             </button>
-            <span className="text-gray-300">|</span>
+            <span className="text-gray-300 dark:text-slate-800">|</span>
             <button 
               type="button" 
               onClick={() => selectTool('powerpoint-editor')}
-              className={`text-xs font-bold transition hover:text-amber-600 ${activeTool === 'powerpoint-editor' ? 'text-amber-600' : 'text-slate-750'}`}
+              className={`text-xs font-bold transition hover:text-amber-600 dark:hover:text-amber-400 ${activeTool === 'powerpoint-editor' ? 'text-amber-600 dark:text-amber-400' : 'text-slate-700 dark:text-slate-300'}`}
             >
               PowerPoint Editor
             </button>
-            <span className="text-gray-300">|</span>
+            <span className="text-gray-300 dark:text-slate-800">|</span>
             <button 
               type="button" 
               onClick={() => selectTool('pdf-to-word')}
-              className="text-xs font-bold text-gray-500 transition hover:text-rose-600"
+              className="text-xs font-bold text-gray-500 dark:text-slate-400 transition hover:text-rose-600 dark:hover:text-rose-400"
             >
               Convert Forms
             </button>
           </nav>
 
           <div className="flex items-center gap-3">
-            <div className="text-[10px] font-mono text-gray-400 bg-gray-50 border border-gray-100 rounded-lg px-2 py-1 flex items-center gap-1">
+            <div className="text-[10px] font-mono text-gray-400 bg-gray-50 border border-gray-100 rounded-lg px-2 py-1 flex items-center gap-1 dark:bg-slate-850/60 dark:bg-slate-800 dark:border-white/10 dark:text-slate-300">
               <Globe className="h-3 w-3 text-emerald-500" />
               <span>100% Offline Secured</span>
             </div>
+
+            {/* Elegant Theme Switcher Button */}
+            <button
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              title={isDarkMode ? 'Switch to Light' : 'Switch to Dark'}
+              className="p-1.5 text-gray-500 hover:text-rose-600 dark:text-slate-400 dark:hover:text-rose-400 bg-gray-50 hover:bg-gray-100 border border-gray-250/50 dark:bg-slate-800 dark:hover:bg-slate-700/80 dark:border-white/10 rounded-lg transition duration-150 flex items-center justify-center cursor-pointer"
+            >
+              {isDarkMode ? <Sun className="h-4.5 w-4.5" /> : <Moon className="h-4.5 w-4.5" />}
+            </button>
           </div>
         </div>
       </header>
@@ -193,13 +220,13 @@ export default function App() {
       </main>
 
       {/* Elegant minimalist footer */}
-      <footer className="bg-white border-t border-gray-200 py-6 text-center mt-auto" id="primary-footer">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+      <footer className="bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-white/10 py-6 text-center mt-auto" id="primary-footer">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400 dark:text-slate-500">
           <p>© 2026 DPLK Tools Inc. Powered by high-speed client compilation pipelines.</p>
           <div className="flex gap-4">
-            <span className="hover:text-gray-600 cursor-pointer">Security Sandbox</span>
+            <span className="hover:text-gray-600 dark:hover:text-slate-300 cursor-pointer">Security Sandbox</span>
             <span>•</span>
-            <span className="hover:text-gray-600 cursor-pointer">Local Privacy Shield</span>
+            <span className="hover:text-gray-600 dark:hover:text-slate-300 cursor-pointer">Local Privacy Shield</span>
           </div>
         </div>
       </footer>

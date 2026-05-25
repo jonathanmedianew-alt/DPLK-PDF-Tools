@@ -1510,7 +1510,7 @@ export default function PowerpointEditor({ onBack }: PowerpointEditorProps) {
   };
 
   return (
-    <div className="bg-slate-900/5 min-h-screen pb-16 relative font-sans" id="powerpoint-tool-root">
+    <div className="bg-slate-900/5 dark:bg-slate-950 min-h-screen pb-16 relative font-sans" id="powerpoint-tool-root">
       
       {/* Top Main Navigation Strip bar */}
       <div className="bg-slate-900 text-white py-3 px-4 sm:px-6 shadow-md border-b border-slate-800">
@@ -1593,7 +1593,7 @@ export default function PowerpointEditor({ onBack }: PowerpointEditorProps) {
       </div>
 
       {/* Editor Sub-Header Tabs */}
-      <div className="bg-white border-b border-slate-200 z-10 print:hidden shadow-xs">
+      <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-white/10 z-10 print:hidden shadow-xs">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between overflow-x-auto gap-2">
           {/* Controls tabs choosing drawer menu panels */}
           <div className="flex gap-1 py-1">
@@ -1609,8 +1609,8 @@ export default function PowerpointEditor({ onBack }: PowerpointEditorProps) {
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`py-2 px-3 sm:px-4 text-xs font-bold rounded-lg flex items-center gap-1.5 transition whitespace-nowrap ${
                   activeTab === tab.id 
-                    ? 'bg-amber-500/10 text-amber-900 border-b-2 border-amber-500' 
-                    : 'text-slate-600 hover:bg-slate-50'
+                    ? 'bg-amber-500/10 text-amber-900 dark:text-amber-400 border-b-2 border-amber-500' 
+                    : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
                 }`}
               >
                 <tab.icon className="h-3.5 w-3.5" />
@@ -1621,22 +1621,22 @@ export default function PowerpointEditor({ onBack }: PowerpointEditorProps) {
 
           <div className="flex items-center gap-3 py-1.5 shrink-0">
             {/* View status bar info */}
-            <div className="flex items-center bg-zinc-100 rounded-lg p-0.5">
+            <div className="flex items-center bg-zinc-100 dark:bg-slate-800 rounded-lg p-0.5">
               <button
                 type="button"
                 onClick={() => setZoomScale(Math.max(60, zoomScale - 10))}
-                className="p-1 text-slate-500 hover:text-slate-900 transition-all"
+                className="p-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all"
                 title="Zoom Out"
               >
                 <ZoomOut className="h-3.5 w-3.5" />
               </button>
-              <span className="text-[10px] font-mono font-semibold px-2 text-slate-600">
+              <span className="text-[10px] font-mono font-semibold px-2 text-slate-600 dark:text-slate-300">
                 {zoomScale}% Scale
               </span>
               <button
                 type="button"
                 onClick={() => setZoomScale(Math.min(150, zoomScale + 10))}
-                className="p-1 text-slate-500 hover:text-slate-900 transition-all"
+                className="p-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all"
                 title="Zoom In"
               >
                 <ZoomIn className="h-3.5 w-3.5" />
@@ -1646,7 +1646,7 @@ export default function PowerpointEditor({ onBack }: PowerpointEditorProps) {
             <button
               type="button"
               onClick={() => setShowHelp(!showHelp)}
-              className="p-1 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-slate-600 transition"
+              className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition"
               title="Help Manual and Tips"
             >
               <HelpCircle className="h-4 w-4" />
