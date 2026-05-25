@@ -1,0 +1,6 @@
+{
+  "name": "DPLK Tools",
+  "description": "A high-performance client-side PDF utility for merging, splitting, compressing, converting format types, and interactive layout editing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
