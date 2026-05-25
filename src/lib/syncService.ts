@@ -4,7 +4,7 @@ import { AccessRequest } from '../types';
 function getSyncId(): string {
   // Use a stable, constant identifier derived from the applet ID to prevent database partitioning.
   // This ensures localhost, dev servers, and live URLs all synchronize to the exact same workspace registry.
-  return 'dplk_suite_0e8c24c7_57c5';
+  return 'ff8081819d82fab6019e5e4dd3c2765f';
 }
 
 const DEFAULT_USERS: AccessRequest[] = [
